@@ -1,0 +1,85 @@
+# AI Platform Reference Architecture – Production Program
+
+Author: Carlos Alejandro Perez Ceron
+Role: AI Platform & FinOps Architect  
+
+---
+
+## Executive Summary
+
+This repository defines a secure, GPU-enabled AI platform architecture deployed on AWS EKS.
+
+The objective is to demonstrate how AI workloads can be deployed with:
+
+- Secure network isolation
+- GPU-aware Kubernetes scheduling
+- Observability and performance metrics
+- Cost-per-inference modeling
+- FinOps governance integration
+
+This repository is managed under a structured implementation program visible in the GitHub Projects section.
+
+---
+
+## Architecture Components
+
+- VPC with private subnets
+- Private EKS cluster
+- CPU node group
+- GPU node group (g5.xlarge default)
+- Prometheus monitoring
+- Grafana dashboards
+- Cost modeling scripts
+- Threat modeling documentation
+
+---
+
+## Security Principles
+
+- No public EKS endpoint
+- IAM least privilege
+- IRSA for workloads
+- Namespace isolation
+- Network policies applied
+- Container image scanning documented
+
+---
+
+## FinOps Modeling
+
+Included:
+
+- GPU monthly baseline cost estimator
+- Cost per inference calculator
+- Reserved vs On-Demand analysis
+- GPU underutilization simulation
+
+---
+
+## Observability
+
+Monitored metrics:
+
+- CPU usage
+- Memory usage
+- GPU utilization
+- Request latency
+- Error rate
+- Cost efficiency ratio
+
+---
+
+## Trade-offs
+
+- GPU nodes increase baseline cost but reduce inference latency.
+- Reserved instances improve predictability but reduce flexibility.
+- Private clusters increase security posture but add networking complexity.
+
+---
+
+## Future Enhancements
+
+- Spot instance automation
+- Multi-cloud deployment model
+- AI Survivability scoring
+- Cost anomaly detection
