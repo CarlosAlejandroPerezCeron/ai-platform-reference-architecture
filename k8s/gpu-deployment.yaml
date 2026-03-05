@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpu-workload
+  namespace: ai-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gpu-app
+  template:
+    metadata:
+      labels:
+        app: gpu-app
+    spec:
+      containers:
+      - name: gpu-container
+        image: pytorch/pytorch:latest
+        resources:
+          limits:
+            nvidia.com/gpu: 1
