@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inference-metrics
+data:
+  metrics.yaml: |
+    - name: inference_latency
+    - name: gpu_utilization
+    - name: request_rate
+    - name: cost_per_request
