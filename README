@@ -1,84 +1,205 @@
-AI Platform Reference Architecture – Production Program
+# AI Platform Reference Architecture v1.0.0
 
-Author: Carlos Alejandro Perez Ceron
-Role: AI Platform & FinOps Architect  
-
----
-
-Executive Summary
-
-This repository defines a secure, GPU-enabled AI platform architecture deployed on AWS EKS.
-
-The objective is to demonstrate how AI workloads can be deployed with:
-
-- Secure network isolation
-- GPU-aware Kubernetes scheduling
-- Observability and performance metrics
-- Cost-per-inference modeling
-- FinOps governance integration
-
-This repository is managed under a structured implementation program visible in the GitHub Projects section.
+Status: Active Development  
+Maturity: Baseline Architecture Implemented  
 
 ---
 
- Architecture Components
+## Executive Summary
 
-- VPC with private subnets
+Most AI initiatives fail not because of model performance, but because of infrastructure instability, uncontrolled GPU spending, and weak governance.
+
+This project presents a structured AI Platform Reference Architecture combining:
+
+- Secure MLOps foundations  
+- GPU workload isolation  
+- Financial governance by design  
+- Risk-aware infrastructure modeling  
+
+The objective is long-term operational sustainability — not just model deployment.
+
+---
+
+## Problem Statement
+
+Enterprise AI workloads introduce three critical risks:
+
+1. GPU cost explosion  
+2. Infrastructure instability  
+3. Security exposure through model misuse  
+
+Without governance, AI becomes financially unpredictable and operationally fragile.
+
+This architecture addresses those risks structurally.
+
+---
+
+## Architecture Overview
+
+The platform is designed across five layers:
+
+### 1. Network Layer
+- Private VPC
+- Multi-AZ private subnets
+- No public worker exposure
+
+### 2. Compute Layer
 - Private EKS cluster
-- CPU node group
-- GPU node group (g5.xlarge default)
-- Prometheus monitoring
-- Grafana dashboards
-- Cost modeling scripts
-- Threat modeling documentation
+- Managed node groups
+- Dedicated GPU node group with taints
 
----
+### 3. Security Layer
+- IAM least privilege model
+- OPA policy enforcement
+- Threat scoring model
 
-Security Principles
-
-- No public EKS endpoint
-- IAM least privilege
-- IRSA for workloads
-- Namespace isolation
-- Network policies applied
-- Container image scanning documented
-
----
-
-FinOps Modeling
-
-Included:
-
-- GPU monthly baseline cost estimator
-- Cost per inference calculator
-- Reserved vs On-Demand analysis
-- GPU underutilization simulation
-
----
-
- Observability
-
-Monitored metrics:
-
-- CPU usage
-- Memory usage
-- GPU utilization
-- Request latency
-- Error rate
-- Cost efficiency ratio
-
----
- Trade-offs
-
-- GPU nodes increase baseline cost but reduce inference latency.
-- Reserved instances improve predictability but reduce flexibility.
-- Private clusters increase security posture but add networking complexity.
-
----
-
- Future Enhancements
-
-- Spot instance automation
-- Multi-cloud deployment model
-- AI Survivability scoring
+### 4. Financial Governance Layer
+- GPU cost modeling
+- Reserved vs Spot simulation
 - Cost anomaly detection
+
+### 5. Sustainability Layer
+- AI Survivability Index
+- SLO definition
+- Risk-weighted operational scoring
+
+---
+
+## Governance Features
+
+- Statistical GPU cost anomaly detection (pandas-based)
+- OPA GPU workload enforcement
+- Explicit GPU resource declarations
+- Risk scoring for cost exhaustion and resource abuse
+
+---
+
+## Financial Model Summary
+
+Primary cost driver: GPU compute.
+
+Baseline:
+- g5.xlarge ≈ $1.20/hour
+- Monthly On-Demand ≈ $864
+- Reserved savings ≈ 30%
+- Spot savings ≈ 65%
+
+Includes:
+
+- Cost per inference calculation
+- Utilization impact simulation
+- Reserved vs Spot comparison
+- Financial exposure modeling
+
+---
+
+## Security Posture
+
+Threat model includes:
+
+- GPU resource exhaustion
+- Cost exhaustion attack
+- Model artifact tampering
+- Prompt injection exposure
+
+Each threat includes:
+
+- Impact score
+- Likelihood score
+- Risk calculation
+- Mitigation strategy
+
+---
+
+## AI Survivability Index
+
+Proprietary scoring model evaluating:
+
+- Cost risk
+- Security risk
+- Availability performance
+
+Formula:
+
+Survivability =
+(Availability × 0.4) +
+((5 − Cost Risk) × 0.3) +
+((5 − Security Risk) × 0.3)
+
+Purpose:
+Measure long-term sustainability of AI infrastructure deployments.
+
+---
+
+## Resilience Model
+
+Target Availability: 99.5%  
+Error Budget: 0.5% monthly downtime  
+Latency Target: < 200ms p95  
+
+Failure scenarios covered:
+
+- GPU node crash
+- Spot interruption
+- Traffic spike
+
+Mitigation includes autoscaling and fallback strategies.
+
+---
+
+## Trade-offs
+
+- Spot not used for critical inference workloads
+- Multi-cloud not enabled in baseline due to operational complexity
+- Dedicated GPU nodes preferred over shared pools for performance predictability
+
+---
+
+## Limitations
+
+- No live AWS deployment validated
+- No direct billing API integration
+- No external secrets manager integrated
+- Designed as architectural reference, not production-hardened blueprint
+
+---
+
+## Roadmap
+
+Phase 1 – Baseline Architecture (Complete)  
+Phase 2 – Policy Enforcement (Complete)  
+Phase 3 – Cost Intelligence Automation (In Progress)  
+Phase 4 – Multi-cloud Extension (Planned)  
+
+---
+
+## Validation
+
+Terraform:
+
+terraform init  
+terraform validate  
+terraform plan  
+
+Kubernetes:
+
+kubectl apply -f k8s/
+
+Financial Modeling:
+
+python finops/financial-model.py  
+python finops/cost-anomaly-detector.py  
+
+---
+
+## Purpose
+
+This repository represents a structured AI infrastructure program designed to balance:
+
+Security  
+Financial sustainability  
+Operational resilience  
+
+It reflects an engineering-first governance model for AI platforms.
+
+---
